@@ -10,6 +10,8 @@ builder.Services.AddDbContext<StoreDbContext>(opts => {
     builder.Configuration["ConnectionStrings:SportsStoreConnection"]);
 });
 
+builder.Services.AddScoped<IStoreRepository, EFStoreRepository>();
+
 var app = builder.Build();
 
 //app.MapGet("/", () => "Hello World!");
@@ -17,5 +19,7 @@ var app = builder.Build();
 app.UseStaticFiles();
 
 app.MapDefaultControllerRoute();
+
+SeedData.EnsurePopulated(app);
 
 app.Run();
