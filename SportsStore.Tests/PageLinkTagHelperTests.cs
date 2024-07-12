@@ -21,18 +21,14 @@ namespace SportsStore.Tests
         {
             // Arrange
             var urlHelper = new Mock<IUrlHelper>();
-            urlHelper.SetupSequence(x => x.Action(It.IsAny
-           <UrlActionContext>()))
+            urlHelper.SetupSequence(x => x.Action(It.IsAny <UrlActionContext>()))
             .Returns("Test/Page1")
             .Returns("Test/Page2")
             .Returns("Test/Page3");
             var urlHelperFactory = new Mock<IUrlHelperFactory>();
-            urlHelperFactory.Setup(f =>
-            f.GetUrlHelper(It.IsAny<ActionContext>()))
-            .Returns(urlHelper.Object);
+            urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>())).Returns(urlHelper.Object);
             var viewContext = new Mock<ViewContext>();
-            PageLinkTagHelper helper =
-            new PageLinkTagHelper(urlHelperFactory.Object)
+            PageLinkTagHelper helper = new PageLinkTagHelper(urlHelperFactory.Object)
             {
                 PageModel = new PagingInfo
                 {
@@ -40,23 +36,24 @@ namespace SportsStore.Tests
                     TotalItems = 28,
                     ItemsPerPage = 10
                 },
+
                 ViewContext = viewContext.Object,
                 PageAction = "Test"
             };
-            TagHelperContext ctx = new TagHelperContext(
-            new TagHelperAttributeList(),
-            new Dictionary<object, object>(), "");
+
+            TagHelperContext ctx = new TagHelperContext(new TagHelperAttributeList(),
+                                                        new Dictionary<object, object>(), "");
             var content = new Mock<TagHelperContent>();
-            TagHelperOutput output = new TagHelperOutput("div",
-            new TagHelperAttributeList(),
-            (cache, encoder) => Task.FromResult(content.Object));
+            TagHelperOutput output = new TagHelperOutput("div", new TagHelperAttributeList(), (cache, encoder) => Task.FromResult(content.Object));
+
             // Act
             helper.Process(ctx, output);
+
             // Assert
             Assert.Equal(@"<a href=""Test/Page1"">1</a>"
-            + @"<a href=""Test/Page2"">2</a>"
-            + @"<a href=""Test/Page3"">3</a>",
-            output.Content.GetContent());
+                        + @"<a href=""Test/Page2"">2</a>"
+                        + @"<a href=""Test/Page3"">3</a>",
+                        output.Content.GetContent());
         }
 
         [Fact]
@@ -64,10 +61,7 @@ namespace SportsStore.Tests
         {
             // Arrange
             Mock<IStoreRepository> mock = new Mock<IStoreRepository>();
-            mock.Setup(m => m.Products).Returns((new Product[] {
-            new Product {ProductID = 1, Name = "P1"},
-             new Product {ProductID = 2, Name = "P2"}
-            }).AsQueryable<Product>());
+            mock.Setup(m => m.Products).Returns((new Product[] {new Product {ProductID = 1, Name = "P1"}, new Product {ProductID = 2, Name = "P2"}}).AsQueryable<Product>());
             HomeController controller = new HomeController(mock.Object);
 
             // Act
