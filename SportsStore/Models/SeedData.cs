@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SportsStore.Models
 {
@@ -82,7 +81,7 @@ namespace SportsStore.Models
                     }
                 );
 
-            context.SaveChanges();
+                context.SaveChanges();
             }
         }
     }

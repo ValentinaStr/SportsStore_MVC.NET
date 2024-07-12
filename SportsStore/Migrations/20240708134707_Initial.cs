@@ -19,6 +19,7 @@ namespace SportsStore.Migrations
                     Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
+
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductID);
