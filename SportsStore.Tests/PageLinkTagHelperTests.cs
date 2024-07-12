@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -10,8 +7,6 @@ using SportsStore.Controllers;
 using SportsStore.Infrastructure;
 using SportsStore.Models;
 using SportsStore.Models.ViewModels;
-using Xunit;
-using static System.Net.Mime.MediaTypeNames;
 namespace SportsStore.Tests
 {
     public class PageLinkTagHelperTests
